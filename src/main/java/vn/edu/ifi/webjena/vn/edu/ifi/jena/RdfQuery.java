@@ -30,11 +30,13 @@ public class RdfQuery {
         // TODO Auto-generated method stub
         String service = "http://dbpedia.org/sparql";
         String queryString = "";
-        queryString = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?label " +
+        queryString = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?label ?abstract " +
                 "WHERE {" +
                 "<http://dbpedia.org/resource/"+ville+"> <http://dbpedia.org/ontology/country> ?y ."+
                 "?y rdfs:label ?label ."+
-                "FILTER (LANG(?label) = 'en')"+
+                "?y <http://dbpedia.org/ontology/abstract> ?abstract ."+
+                "FILTER (LANG(?label) = 'en') ."+
+                "FILTER (LANG(?abstract)='en') ."+
                 "}";
         //System.out.println(queryString);
         Query query = QueryFactory.create(queryString);
